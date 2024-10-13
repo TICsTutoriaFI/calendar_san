@@ -1,7 +1,7 @@
 name: calendar_san
-description: "A new Flutter package project."
+description: "Calendar Library for use as a importable schedule component in apps."
 version: 0.0.1
-homepage:
+homepage: https://github.com/threeyeies/calendar_san.git
 
 environment:
   sdk: ^3.5.3
@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.1.2
+  syncfusion_flutter_calendar: ^27.1.48
 
 dev_dependencies:
   flutter_test:

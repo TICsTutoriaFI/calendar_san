@@ -1,7 +1,4 @@
 library calendar_san;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+// Export any libraries intended for clients of this package.
+export 'src/views/calendar_layout.dart';

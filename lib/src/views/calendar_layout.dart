@@ -14,7 +14,7 @@ class CalendarLayout extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
               child: Center(
                 child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: 18,
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text('Item $index', style: Theme.of(context).textTheme.labelSmall),
@@ -27,9 +27,26 @@ class CalendarLayout extends StatelessWidget {
           Expanded(
             flex: 15,
             child: Container(
-              color: Theme.of(context).colorScheme.secondary,
-              child: const Center(
-                child: Text('Zona del Evento'),
+              //color: Theme.of(context).colorScheme.secondary,
+              child: Center(
+                child:  GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 7,
+                  ),
+                  itemCount: 31,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Center(
+                        child: Text(
+                          '${index + 1}',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           )

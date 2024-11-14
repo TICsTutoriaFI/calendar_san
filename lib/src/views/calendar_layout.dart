@@ -1,39 +1,13 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CalendarSan extends StatefulWidget {
+  const CalendarSan({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SimplePage(),
-    );
-  }
+  _CalendarSanState createState() => _CalendarSanState();
 }
 
-class SimplePage extends StatelessWidget {
-  const SimplePage({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Calendario(),
-    );
-  }
-}
-
-class Calendario extends StatefulWidget {
-  const Calendario({super.key});
-
-  @override
-  _CalendarioState createState() => _CalendarioState();
-}
-
-class _CalendarioState extends State<Calendario> {
+class _CalendarSanState extends State<CalendarSan> {
   // Usaremos una lista de listas para almacenar los eventos en la tabla
   List<List<String?>> eventos =
       List.generate(6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
@@ -64,10 +38,12 @@ class _CalendarioState extends State<Calendario> {
     ];
     List<String> horas = List.generate(15, (index) => '${index + 7}:00'); // Horas de 7 a 21
 
-    return Scaffold(
-      body: Padding(
+    return Flexible(
+      fit: FlexFit.loose,
+      child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Fila para los encabezados de los días
             Row(

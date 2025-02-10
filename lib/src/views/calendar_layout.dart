@@ -12,22 +12,9 @@ class _CalendarSanState extends State<CalendarSan> {
   List<List<String?>> eventos =
       List.generate(6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
 
-  // Método para agregar un evento
-  void agregarEvento(int dia, int hora, String evento) {
-    setState(() {
-      eventos[dia][hora] = evento;
-    });
-  }
-
-  // Método para eliminar un evento
-  void eliminarEvento(int dia, int hora) {
-    setState(() {
-      eventos[dia][hora] = null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+
     List<String> dias = [
       'Lunes',
       'Martes',
@@ -36,6 +23,7 @@ class _CalendarSanState extends State<CalendarSan> {
       'Viernes',
       'Sábado'
     ];
+    
     List<String> horas = List.generate(15, (index) => '${index + 7}:00'); // Horas de 7 a 21
 
     return Flexible(

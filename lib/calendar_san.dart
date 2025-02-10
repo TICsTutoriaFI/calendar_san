@@ -3,4 +3,7 @@ library calendar_san;
 // Export any libraries intended for clients of this package.
 export 'src/views/calendar_layout.dart';
 export 'src/views/calendar_controller.dart';
-export 'src/views/calendar_items.dart';
+
+//Add dart files of models (new 2025 features )
+export 'src/models/calendar.dart';
+export 'src/models/calendar_item.dart';

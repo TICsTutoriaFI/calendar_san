@@ -34,8 +34,56 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+
+  // testing json serialization
+  void sendCalendarFeatures(){
+    // Create a new calendar
+    Calendar calendar = Calendar(
+      id: '1',
+      title: 'Horario de tutorado',
+      description: 'Un f horarios',
+      startDay: 1,
+      endDay: 3,
+      startHour: '7:00:00',
+      endHour: '09:00:00',
+      location: 'Facultad de Ingeniería',
+    );
+
+    // Create a new calendar item
+    CalendarItem item = CalendarItem(
+      docente: 'Juan Pérez',
+      materia: 'Matemáticas',
+      grupo: '1A',
+      horarios: [
+        Schedule(
+          dia: 1,
+          horaInicial: 7,
+          minutosInicial: 0,
+          horaFinal: 9,
+          minutosFinal: 0,
+        ),
+        Schedule(
+          dia: 2,
+          horaInicial: 7,
+          minutosInicial: 0,
+          horaFinal: 9,
+          minutosFinal: 0,
+        ),
+        Schedule(
+          dia: 3,
+          horaInicial: 7,
+          minutosInicial: 0,
+          horaFinal: 9,
+          minutosFinal: 0,
+        ),
+      ],
+    );
+    CalendarController controller = CalendarController();
+    controller.createDaysofWeek('1', '3');
+  }
   @override
   Widget build(BuildContext context) {
+    sendCalendarFeatures();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

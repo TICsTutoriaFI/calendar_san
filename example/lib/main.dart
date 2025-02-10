@@ -35,19 +35,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
-  // testing json serialization
+  // ejemplo para probar json serialization y ver si podemos recibir datos de delphos
   void sendCalendarFeatures(){
-    // Create a new calendar
-    Calendar calendar = Calendar(
-      id: '1',
-      title: 'Horario de tutorado',
-      description: 'Un f horarios',
-      startDay: 1,
-      endDay: 3,
-      startHour: '7:00:00',
-      endHour: '09:00:00',
-      location: 'Facultad de Ingeniería',
-    );
 
     // Create a new calendar item
     CalendarItem item = CalendarItem(
@@ -78,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
+
+    // esto esta bien mal porque no puedo decirle asi que me cree de esos dia a tabla
     CalendarController controller = CalendarController();
     controller.createDaysofWeek('1', '3');
   }

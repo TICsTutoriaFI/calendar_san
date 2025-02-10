@@ -2,10 +2,10 @@ class Calendar {
   final String id;
   final String title;
   final String description;
-  final String startDay;
-  final String endDay;
-  final DateTime startHour;
-  final DateTime endHour;
+  final int startDay;
+  final int endDay;
+  final String startHour;
+  final String endHour;
   final String location;
 
 
@@ -25,10 +25,10 @@ class Calendar {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      startDay: json['start_date'],
-      endDay: json['end_date'],
-      startHour: DateTime.parse(json['start_hour']),
-      endHour: DateTime.parse(json['end_hour']),
+      startDay: int.parse(json['start_date']) ,
+      endDay: int.parse(json['end_date']),
+      startHour: json['start_hour'],
+      endHour: json['end_hour'],
       location: json['location'],
     );
   }

@@ -33,48 +33,104 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   // ejemplo para probar json serialization y ver si podemos recibir datos de delphos
-  void sendCalendarFeatures(){
-
-    // Create a new calendar item
-    CalendarItem item = CalendarItem(
-      docente: 'Juan Pérez',
-      materia: 'Matemáticas',
-      grupo: '1A',
-      horarios: [
-        Schedule(
-          dia: 1,
-          horaInicial: 7,
-          minutosInicial: 0,
-          horaFinal: 9,
-          minutosFinal: 0,
-        ),
-        Schedule(
-          dia: 2,
-          horaInicial: 7,
-          minutosInicial: 0,
-          horaFinal: 9,
-          minutosFinal: 0,
-        ),
-        Schedule(
-          dia: 3,
-          horaInicial: 7,
-          minutosInicial: 0,
-          horaFinal: 9,
-          minutosFinal: 0,
-        ),
-      ],
-    );
-
-    // esto esta bien mal porque no puedo decirle asi que me cree de esos dia a tabla
-    CalendarController controller = CalendarController();
-    controller.createDaysofWeek('1', '3');
+  String sendCalendarFeatures() {
+    //example of json serialization
+    String json = """{
+      "Schedules": [
+        {
+          "Professor": "Juanito",
+          "Subject": "Español",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "1"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "3"
+            }
+          ]
+        },
+        {
+          "Professor": "Pepito",
+          "Subject": "Matemáticas",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "2"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "4"
+            }
+          ]
+        }
+      ]
+    }""";
+    return json;
   }
+
   @override
   Widget build(BuildContext context) {
-    sendCalendarFeatures();
+    const String json = """{
+      "Schedules": [
+        {
+          "Professor": "Juanito",
+          "Subject": "Español",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "1"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "3"
+            }
+          ]
+        },
+        {
+          "Professor": "Pepito",
+          "Subject": "Matemáticas",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "2"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "4"
+            }
+          ]
+        }
+      ]
+    }""";
+
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -92,10 +148,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: const Column(
-            children:[
-              CalendarSan(), 
-            ],
+        children: [
+          CalendarSan(
+            startDay: 1,
+            endDay: 6,
+            startHour: 4,
+            endHour: 15,
           ),
-      );
+        ],
+      ),
+    );
   }
 }

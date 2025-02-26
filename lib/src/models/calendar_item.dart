@@ -1,76 +1,87 @@
-// Esta es una clase para la instancia del horario de cada item
+class ScheduleResponse {
+  final List<Schedule> schedules;
+
+  ScheduleResponse({
+    required this.schedules,
+  });
+
+  factory ScheduleResponse.fromJson(Map<String, dynamic> json) {
+    return ScheduleResponse(
+      schedules: (json['Schedules'] as List<dynamic>)
+          .map((scheduleJson) => Schedule.fromJson(scheduleJson as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'Schedules': schedules.map((schedule) => schedule.toJson()).toList(),
+    };
+  }
+}
+
 class Schedule {
-  final int dia;
-  final int horaInicial;
-  final int minutosInicial;
-  final int horaFinal;
-  final int minutosFinal;
+  final String professor;
+  final String subject;
+  final List<ScheduleDetail> details;
 
   Schedule({
-    required this.dia,
-    required this.horaInicial,
-    required this.minutosInicial,
-    required this.horaFinal,
-    required this.minutosFinal,
+    required this.professor,
+    required this.subject,
+    required this.details,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
     return Schedule(
-      dia: json['dia'],
-      horaInicial: json['hora_inicial'],
-      minutosInicial: json['minutos_inicial'],
-      horaFinal: json['hora_final'],
-      minutosFinal: json['minutos_final'],
+      professor: json['Professor'] as String,
+      subject: json['Subject'] as String,
+      details: (json['Details'] as List<dynamic>)
+          .map((detailJson) => ScheduleDetail.fromJson(detailJson as Map<String, dynamic>))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'dia': dia,
-      'hora_inicial': horaInicial,
-      'minutos_inicial': minutosInicial,
-      'hora_final': horaFinal,
-      'minutos_final': minutosFinal,
+      'Professor': professor,
+      'Subject': subject,
+      'Details': details.map((detail) => detail.toJson()).toList(),
     };
   }
 }
 
-// Esta es una clase para la instancia de cada item
-class CalendarItem {
-  final String docente;
-  final String materia;
-  final String grupo;
+class ScheduleDetail {
+  final String iniHour;
+  final String iniMin;
+  final String endHour;
+  final String endMin;
+  final String day;
 
-  // Para esta cada item se tiene la lista de sus horarios o repeticiones a lo largo de una semana
-  final List<Schedule> horarios;
-
-  CalendarItem({
-    required this.docente,
-    required this.materia,
-    required this.grupo,
-    required this.horarios,
+  ScheduleDetail({
+    required this.iniHour,
+    required this.iniMin,
+    required this.endHour,
+    required this.endMin,
+    required this.day,
   });
 
-  factory CalendarItem.fromJson(Map<String, dynamic> json) {
-    var list = json['horarios'] as List;
-    List<Schedule> horariosList = list.map((i) => Schedule.fromJson(i)).toList();
-
-    return CalendarItem(
-      docente: json['docente'],
-      materia: json['materia'],
-      grupo: json['grupo'],
-      horarios: horariosList,
+  factory ScheduleDetail.fromJson(Map<String, dynamic> json) {
+    return ScheduleDetail(
+      iniHour: json['inihour'] as String,
+      iniMin: json['inimin'] as String,
+      endHour: json['endhour'] as String,
+      endMin: json['endmin'] as String,
+      day: json['day'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'docente': docente,
-      'materia': materia,
-      'grupo': grupo,
-      'horarios': horarios.map((e) => e.toJson()).toList(),
+      'inihour': iniHour,
+      'inimin': iniMin,
+      'endhour': endHour,
+      'endmin': endMin,
+      'day': day,
     };
   }
 }
-
-

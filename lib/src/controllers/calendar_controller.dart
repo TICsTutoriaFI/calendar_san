@@ -1,6 +1,5 @@
-class CalendarController { 
-
-  List<String> days = []; 
+class CalendarController {
+  List<String> days = [];
 
   createDays(String startDay, String endDay) {
     List<String> days = [];
@@ -22,7 +21,14 @@ class CalendarController {
       }
     }
     return days;
-    
+  }
+
+  createHours(String startHour, String endHour) {
+    int hourLapse = (int.parse(endHour) - int.parse(startHour))+1;
+    int start = int.parse(startHour);
+    List<String> hours =
+        List.generate(hourLapse, (index) => '${index + start}:00');
+    return hours;
   }
 
   createDaysofWeek(String startDay, String endDay) {
@@ -45,7 +51,5 @@ class CalendarController {
       }
     }
     return this.days = days;
-    
   }
-
 }

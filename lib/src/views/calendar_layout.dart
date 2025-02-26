@@ -1,43 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:calendar_san/src/controllers/calendar_controller.dart';
+import 'package:calendar_san/src/controllers/item_controller.dart';
+import 'package:calendar_san/src/models/calendar_item.dart';
 
 class CalendarSan extends StatefulWidget {
-  const CalendarSan({super.key});
+  final int startDay;
+  final int endDay;
+  final int startHour;
+  final int endHour;
+  final String json;
+
+  const CalendarSan(
+      {super.key,
+      this.startDay = 1,
+      this.endDay = 5,
+      this.startHour = 7,
+      this.endHour = 21,
+      this.json = ''});
 
   @override
   _CalendarSanState createState() => _CalendarSanState();
 }
 
 class _CalendarSanState extends State<CalendarSan> {
-
-
-  // Hacer la creacion de la lista de eventos en item_controller en lib/src/controllers/calendar_controller.dart
-  List<List<String?>> eventos =
-      List.generate(6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
-
   @override
   Widget build(BuildContext context) {
-
-
-    // Ya puedo usar el controlador desde aquí pero para que lo hagan desde el que usa la librería como?
-    // es decir que se pueda decir desde /example/lib/main.dart que sería como delphos
-
-    
+    // Crear un controlador de calendario
     CalendarController controller = CalendarController();
-    List<String> days = controller.createDays('1', '4');
+    List<String> days = controller.createDays(
+        widget.startDay.toString(), widget.endDay.toString());
+    List<String> hours = controller.createHours(
+        widget.startHour.toString(), widget.endHour.toString());
 
+    List<ScheduleResponse> items = ItemController.getItems(widget.json);
 
+    // Imprimir la lista de items en la consola
+    print('Items: $items');
 
-    List<String> dias = [
-      'Lunes',
-      'Martes',
-      'Miércoles',
-      'Jueves',
-      'Viernes',
-      'Sábado'
-    ];
-
-    List<String> horas = List.generate(15, (index) => '${index + 7}:00'); // Horas de 7 a 21
+    List<List<String?>> eventos = List.generate(
+        6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
 
     return Flexible(
       fit: FlexFit.loose,
@@ -71,7 +74,7 @@ class _CalendarSanState extends State<CalendarSan> {
                   children: [
                     // Columna de horas
                     Column(
-                      children: horas.map((hora) {
+                      children: hours.map((hora) {
                         return Container(
                           width: 60,
                           height: 60,
@@ -87,20 +90,23 @@ class _CalendarSanState extends State<CalendarSan> {
                           int indexDia = entry.key;
                           return Expanded(
                             child: Column(
-                              children: horas.asMap().entries.map((entry) {
+                              children: hours.asMap().entries.map((entry) {
                                 int indexHora = entry.key;
                                 String? evento = eventos[indexDia][indexHora];
 
                                 return Container(
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: Colors.black)),
+                                    border: Border(
+                                        bottom:
+                                            BorderSide(color: Colors.black)),
                                     color: evento != null
                                         ? Colors.lightBlueAccent
                                         : Colors.white,
                                   ),
                                   child: Center(
-                                      child: Text(evento ?? 'Aqui puede o no ir una materia')),
+                                      child: Text(evento ??
+                                          'Aqui puede o no ir una materia')),
                                 );
                               }).toList(),
                             ),

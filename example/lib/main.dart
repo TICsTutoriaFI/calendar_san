@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Delfos demo'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -35,6 +36,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    const String json = """[
+        {
+          "Professor": "Juanito Valencia Pool",
+          "Subject": "Español",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "1"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "3"
+            }
+          ]
+        },
+        {
+          "Professor": "Pepito Pica Papas",
+          "Subject": "Matemáticas",
+          "Details": [
+            {
+              "inihour": "7",
+              "inimin": "00",
+              "endhour": "9",
+              "endmin": "00",
+              "day": "2"
+            },
+            {
+              "inihour": "10",
+              "inimin": "00",
+              "endhour": "12",
+              "endmin": "00",
+              "day": "4"
+            }
+          ]
+        }
+      ]""";
+
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -52,10 +97,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: const Column(
-            children:[
-              CalendarLayout(), 
-            ],
+        children: [
+          CalendarSan(
+            startDay: 1,
+            endDay: 6,
+            startHour: 4,
+            endHour: 15,
+            json: json, // Pass the JSON string here
           ),
-      );
+        ],
+      ),
+    );
   }
 }

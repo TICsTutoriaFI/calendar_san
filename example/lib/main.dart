@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     const String json = """[
         {
-          "Professor": "Juanito",
+          "Professor": "Juanito Valencia Pool",
           "Subject": "Español",
           "Details": [
             {
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ]
         },
         {
-          "Professor": "Pepito",
+          "Professor": "Pepito Pica Papas",
           "Subject": "Matemáticas",
           "Details": [
             {

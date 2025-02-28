@@ -35,24 +35,23 @@ class _CalendarSanState extends State<CalendarSan> {
     // Crear una lista de items de calendario
     // Esta lista se obtiene a partir de un JSON
     List<CalendarItem> items = ItemController.fromJson(widget.json);
-    
-    void printItems(){
-      for (var item in items) {
-        print('Professor: ${item.professor}');
-        print('Subject: ${item.subject}');
-        for (var detail in item.details) {
-          print('Detail: ${detail.iniHour}:${detail.iniMin} - ${detail.endHour}:${detail.endMin} - ${detail.day}');
+
+    // Crear una matriz para almacenar los eventos
+    List<List<String?>> eventos = List.generate(
+        days.length, (_) => List.generate(hours.length, (_) => null));
+
+    // Llenar la matriz con los eventos
+    for (var item in items) {
+      for (var detail in item.details) {
+        int dayIndex = int.parse(detail.day) - widget.startDay;
+        int startHourIndex = int.parse(detail.iniHour) - widget.startHour;
+        int endHourIndex = int.parse(detail.endHour) - widget.startHour;
+
+        for (int i = startHourIndex; i <= endHourIndex; i++) {
+          eventos[dayIndex][i] = '${item.subject}\n${item.professor}';
         }
       }
     }
-    printItems();
-
-    // Cuando ya sirva obtener la lista de items de un JSON
-    // Imprimir la lista de items en la consola
-    //print('Items: $items');
-
-    List<List<String?>> eventos = List.generate(
-        6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
 
     return Flexible(
       fit: FlexFit.loose,
@@ -113,12 +112,13 @@ class _CalendarSanState extends State<CalendarSan> {
                                         bottom:
                                             BorderSide(color: Colors.black)),
                                     color: evento != null
-                                        ? Colors.lightBlueAccent
+                                        ? Theme.of(context).primaryColor.withOpacity(0.5)
                                         : Colors.white,
                                   ),
                                   child: Center(
                                       child: Text(evento ??
-                                          'Aqui puede o no ir una materia')),
+                                          '',
+                                          textAlign: TextAlign.center)),
                                 );
                               }).toList(),
                             ),

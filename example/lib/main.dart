@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Delfos demo'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -33,60 +33,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // ejemplo para probar json serialization y ver si podemos recibir datos de delphos
-  String sendCalendarFeatures() {
-    //example of json serialization
-    String json = """{
-      "Schedules": [
-        {
-          "Professor": "Juanito",
-          "Subject": "Español",
-          "Details": [
-            {
-              "inihour": "7",
-              "inimin": "00",
-              "endhour": "9",
-              "endmin": "00",
-              "day": "1"
-            },
-            {
-              "inihour": "10",
-              "inimin": "00",
-              "endhour": "12",
-              "endmin": "00",
-              "day": "3"
-            }
-          ]
-        },
-        {
-          "Professor": "Pepito",
-          "Subject": "Matemáticas",
-          "Details": [
-            {
-              "inihour": "7",
-              "inimin": "00",
-              "endhour": "9",
-              "endmin": "00",
-              "day": "2"
-            },
-            {
-              "inihour": "10",
-              "inimin": "00",
-              "endhour": "12",
-              "endmin": "00",
-              "day": "4"
-            }
-          ]
-        }
-      ]
-    }""";
-    return json;
-  }
 
   @override
   Widget build(BuildContext context) {
-    const String json = """{
-      "Schedules": [
+    const String json = """[
         {
           "Professor": "Juanito",
           "Subject": "Español",
@@ -127,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           ]
         }
-      ]
-    }""";
+      ]""";
 
 
     // This method is rerun every time setState is called, for instance as done
@@ -154,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             endDay: 6,
             startHour: 4,
             endHour: 15,
+            json: json, // Pass the JSON string here
           ),
         ],
       ),

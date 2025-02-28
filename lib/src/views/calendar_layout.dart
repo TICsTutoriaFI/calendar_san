@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:calendar_san/src/controllers/calendar_controller.dart';
 import 'package:calendar_san/src/controllers/item_controller.dart';
@@ -34,10 +32,24 @@ class _CalendarSanState extends State<CalendarSan> {
     List<String> hours = controller.createHours(
         widget.startHour.toString(), widget.endHour.toString());
 
-    List<ScheduleResponse> items = ItemController.getItems(widget.json);
+    // Crear una lista de items de calendario
+    // Esta lista se obtiene a partir de un JSON
+    List<CalendarItem> items = ItemController.fromJson(widget.json);
+    
+    void printItems(){
+      for (var item in items) {
+        print('Professor: ${item.professor}');
+        print('Subject: ${item.subject}');
+        for (var detail in item.details) {
+          print('Detail: ${detail.iniHour}:${detail.iniMin} - ${detail.endHour}:${detail.endMin} - ${detail.day}');
+        }
+      }
+    }
+    printItems();
 
+    // Cuando ya sirva obtener la lista de items de un JSON
     // Imprimir la lista de items en la consola
-    print('Items: $items');
+    //print('Items: $items');
 
     List<List<String?>> eventos = List.generate(
         6, (_) => List.generate(15, (_) => null)); // 6 días, 15 horas
@@ -52,7 +64,7 @@ class _CalendarSanState extends State<CalendarSan> {
             // Fila para los encabezados de los días
             Row(
               children: [
-                SizedBox(width: 60), // Espacio para alinear la columna de horas
+                const SizedBox(width: 60), // Espacio para alinear la columna de horas
                 ...days.map((dia) {
                   return Expanded(
                     child: Container(
@@ -97,7 +109,7 @@ class _CalendarSanState extends State<CalendarSan> {
                                 return Container(
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    border: Border(
+                                    border: const Border(
                                         bottom:
                                             BorderSide(color: Colors.black)),
                                     color: evento != null

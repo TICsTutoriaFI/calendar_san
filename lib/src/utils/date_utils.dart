@@ -1,0 +1,1 @@
+//Aquí iran metodos aux o extensiones
